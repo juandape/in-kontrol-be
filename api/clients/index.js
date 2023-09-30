@@ -13,7 +13,7 @@ const router = Router();
 router.get('/', getAllHandler);
 router.get('/:id', getByIdHandler);
 router.post('/', createHandler);
-router.put('/:id', updateHandler);
+router.patch('/:id', updateHandler);
 router.delete('/:id', deleteHandler);
 
 module.exports = router;
