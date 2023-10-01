@@ -33,7 +33,7 @@ async function getByIdHandler(req, res, next) {
 async function createHandler(req, res, next) {
   try {
     const client = await createClient(req.body);
-    res.status(201).json(client);
+    res.status(201).json(client, { message: 'Client created' });
   } catch (error) {
     next(error);
   }
@@ -48,7 +48,7 @@ async function updateHandler(req, res, next) {
       return res.status(404).json({ message: 'Client not found' });
     }
 
-    return res.json(client);
+    return res.json(client, { message: 'Client updated' });
   } catch (error) {
     next(error);
   }
@@ -63,7 +63,7 @@ async function deleteHandler(req, res, next) {
       return res.status(404).json({ message: 'Client not found' });
     }
 
-    return res.status(204).json();
+    return res.status(204).json({ message: 'Client deleted'});
   } catch (error) {
     next(error);
   }
