@@ -41,12 +41,6 @@ const ClientsSchema = new mongoose.Schema(
       required: [true, 'Phone is required'],
       trim: true,
     },
-    orders: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Order',
-      },
-    ],
   },
   {
     timestamps: true,
