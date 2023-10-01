@@ -6,7 +6,7 @@ const {
   createHandler,
   updateHandler,
   deleteHandler,
-} = require('./clients.controller');
+} = require('./clients.cotroller');
 
 const router = Router();
 

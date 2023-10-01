@@ -6,53 +6,71 @@ const {
   deleteItem,
 } = require('./items.service');
 
-function HandlerAllItems(req, res, next) {
-  const items = getAllItems();
-  res.json(items);
-}
-
-function HandlerItemById(req, res, next) {
-  const { id } = req.params;
-  const item = getItemById(id);
-
-  if (!item) {
-    throw new Error(`Item not found with id ${id}`);
-  } else {
-    res.json(item);
+async function getAllHandler(req, res, next) {
+  try {
+    const items = await getAllItems();
+    res.json(items);
+  } catch (error) {
+    next(error);
   }
 }
 
-function HandlerCreateItem(req, res, next) {
-  const item = createItem(req.body);
-  res.json(item);
+async function getByIdHandler(req, res, next) {
+  try {
+    const { id } = req.params;
+    const item = await getItemById(id);
+
+    if (!item) {
+      return res.status(404).json({message: 'Item not found'});
+    }
+    res.json(item);
+  }
+  catch (error) {
+    next(error);
+  }
 }
 
-function HandlerUpdateItem(req, res, next) {
+async function createHandler(req, res, next) {
+  try {
+    const item = await createItem(req.body);
+    res.status(201).json(item);
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function updateHandler(req, res, next) {
+  try{
   const { id } = req.params;
   const item = updateItem(id, req.body);
 
-  if (!item) {
-    throw new Error(`Item not found with id ${id}`);
-  } else {
-    res.json(item);
+    if (!item) {
+      return res.status(404).json({message: 'Item not found'});
+    }
+    return res.json(item);
+  } catch (error) {
+    next(error);
   }
 }
 
-function HandlerDeleteItem(req, res, next) {
+async function deleteHandler(req, res, next) {
+  try{
   const { id } = req.params;
   const item = deleteItem(id);
 
   if (!item) {
-    throw new Error(`Item not found with id ${id}`);
-  } else {
+    return res.status(404).json({message: 'Item not found'});
+  }
     res.json(item);
+  } catch (error) {
+    next(error);
   }
 }
 
 module.exports = {
-  HandlerAllItems,
-  HandlerItemById,
-  HandlerCreateItem,
-  HandlerUpdateItem,
-  HandlerDeleteItem,
+  getAllHandler,
+  getByIdHandler,
+  createHandler,
+  updateHandler,
+  deleteHandler,
 };

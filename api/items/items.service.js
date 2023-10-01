@@ -1,11 +1,11 @@
-const Items = require('./items.model');
+const Item = require('./items.model');
 
 function getAllItems() {
-  return Items.find();
+  return Item.find();
 }
 
 async function getItemById(id) {
-  const item = await Items.findById(id);
+  const item = await Item.findById(id);
 
   if (!item) {
     throw new Error(`Item not found with id ${id}`);
@@ -13,28 +13,28 @@ async function getItemById(id) {
   return item;
 }
 
-function createItem(item) {
-  return Items.create(item);
+function createItem(data) {
+  return Item.create(data);
 }
 
-async function updateItem(id, item) {
-  const foundItem = await Items.findById(id);
+async function updateItem(id, data) {
+  const foundItem = await Item.findById(id);
 
   if (!foundItem) {
     throw new Error(`Item not found with id ${id}`);
   }
 
-  return Items.findByIdAndUpdate(id, item, { new: true, upsert: true });
+  return Item.findByIdAndUpdate(id, data, { new: true, upsert: true });
 }
 
 async function deleteItem(id) {
-  const item = await Items.findById(id);
+  const item = await Item.findById(id);
 
   if (!item) {
     throw new Error(`Item not found with id ${id}`);
   }
 
-  return Items.findByIdAndDelete(id);
+  return Item.findByIdAndDelete(id);
 }
 
 module.exports = {

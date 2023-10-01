@@ -21,6 +21,10 @@ const OrdersSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  deliveryDate: {
+    type: Date,
+    required: true,
+  },
   line: {
     type: String,
     required: true,
@@ -45,7 +49,9 @@ const OrdersSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-});
+},
+{ timestamps: true }
+);
 
 const Orders = mongoose.model('Orders', OrdersSchema);
 module.exports = Orders;

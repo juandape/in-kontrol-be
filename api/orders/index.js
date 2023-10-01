@@ -1,19 +1,19 @@
 const { Router } = require('express');
 
 const {
-  handlerAllOrders,
-  handlerOrderById,
-  handlerCreateOrder,
-  handlerUpdateOrder,
-  handlerDeleteOrder,
+  getAllHandler,
+  getByIdHandler,
+  createHandler,
+  updateHandler,
+  deleteHandler,
 } = require('./orders.controller');
 
 const router = Router();
 
-router.get('/', handlerAllOrders);
-router.get('/:id', handlerOrderById);
-router.post('/', handlerCreateOrder);
-router.patch('/:id', handlerUpdateOrder);
-router.delete('/:id', handlerDeleteOrder);
+router.get('/', getAllHandler);
+router.get('/:id', getByIdHandler);
+router.post('/', createHandler);
+router.patch('/:id', updateHandler);
+router.delete('/:id', deleteHandler);
 
 module.exports = router;

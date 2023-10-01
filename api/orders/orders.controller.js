@@ -6,53 +6,70 @@ const {
   deleteOrder,
 } = require('./orders.service');
 
-function HandlerAllOrders(req, res) {
-  const orders = getAllOrders();
-  res.json(orders);
-}
-
-function HandlerOrderById(req, res) {
-  const { id } = req.params;
-  const order = getOrderById(id);
-
-  if (!order) {
-    res.status(404).json({ message: 'Order not found' });
-  } else {
-    res.json(order);
+async function getAllHandler(req, res, next) {
+  try {
+    const orders = await getAllOrders();
+    res.json(orders);
+  } catch (error) {
+    next(error);
   }
 }
 
-function HandlerCreateOrder(req, res) {
-  const order = createOrder(req.body);
-  res.status(201).json(order);
-}
+async function getByIdHandler(req, res, next) {
+  try {
+    const { id } = req.params;
+    const order = await getOrderById(id);
 
-function HandlerUpdateOrder(req, res) {
-  const { id } = req.params;
-  const order = updateOrder(id, req.body);
-
-  if (!order) {
-    res.status(404).json({ message: 'Order not found' });
-  } else {
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
     res.json(order);
+  } catch (error) {
+    next(error);
   }
 }
 
-function HandlerDeleteOrder(req, res) {
-  const { id } = req.params;
-  const order = deleteOrder(id);
+async function createHandler(req, res, next) {
+  try {
+    const order = await createOrder(req.body);
+    res.status(201).json(order);
+  } catch (error) {
+    next(error);
+  }
+}
 
-  if (!order) {
-    res.status(404).json({ message: 'Order not found' });
-  } else {
-    res.json(order);
+async function updateHandler(req, res, next) {
+  try {
+    const { id } = req.params;
+    const order = updateOrder(id, req.body);
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    return res.json(order);
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function deleteHandler(req, res) {
+  try {
+    const { id } = req.params;
+    const order = deleteOrder(id);
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    return res.json(order);
+  } catch (error) {
+    next(error);
   }
 }
 
 module.exports = {
-  HandlerAllOrders,
-  HandlerOrderById,
-  HandlerCreateOrder,
-  HandlerUpdateOrder,
-  HandlerDeleteOrder,
+  getAllHandler,
+  getByIdHandler,
+  createHandler,
+  updateHandler,
+  deleteHandler,
 };
