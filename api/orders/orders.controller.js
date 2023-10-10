@@ -32,7 +32,7 @@ async function getByIdHandler(req, res, next) {
 async function createHandler(req, res, next) {
   try {
     const order = await createOrder(req.body);
-    res.status(201).json(order, { message: 'Order created' });
+    res.status(201).json({order, message: 'Order created' });
   } catch (error) {
     next(error);
   }
@@ -46,7 +46,7 @@ async function updateHandler(req, res, next) {
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
-    return res.json(order, { message: 'Order updated' });
+    return res.json({order, message: 'Order updated' });
   } catch (error) {
     next(error);
   }
