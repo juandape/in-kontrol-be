@@ -21,9 +21,8 @@ const ClientsSchema = new mongoose.Schema(
     email: {
       type: String,
       lowercase: true,
-      required: [true, 'Email is required'],
+      required: false,
       match: [emailRegex, 'Please enter a valid email'],
-      unique: [true, 'Email already exists'],
       trim: true,
     },
     instagram: {
