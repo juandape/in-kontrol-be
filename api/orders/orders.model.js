@@ -23,7 +23,7 @@ const OrdersSchema = new mongoose.Schema({
   },
   deliveryDate: {
     type: Date,
-    required: true,
+    required: false,
   },
   line: {
     type: String,
