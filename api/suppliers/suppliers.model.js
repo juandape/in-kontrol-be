@@ -9,7 +9,7 @@ const SuppliersSchema = new mongoose.Schema(
       trim: true,
     },
     nit: {
-      type: String,
+      type: Number,
       required: [true, 'Nit is required'],
       trim: true,
     },
@@ -26,7 +26,7 @@ const SuppliersSchema = new mongoose.Schema(
       trim: true,
     },
     phone: {
-      type: String,
+      type: Number,
       required: [true, 'Phone is required'],
       trim: true,
     },
