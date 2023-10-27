@@ -41,7 +41,7 @@ const ItemsSchema = new mongoose.Schema(
     },
     quantity: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   { timestamps: true }
