@@ -25,7 +25,7 @@ const ItemsSchema = new mongoose.Schema(
     },
     marginPerHour: {
       type: Number,
-      required: true,
+      required: false,
     },
     weight: {
       type: Number,
@@ -38,6 +38,10 @@ const ItemsSchema = new mongoose.Schema(
     estimatedMinUn: {
       type: Number,
       required: false,
+    },
+    quantity: {
+      type: Number,
+      required: true,
     },
   },
   { timestamps: true }
