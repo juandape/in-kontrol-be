@@ -60,9 +60,9 @@ async function deleteHandler(req, res) {
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
-    return res.json(order, { message: 'Order deleted' });
+    return res.json({order,  message: 'Order deleted' });
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 }
 
