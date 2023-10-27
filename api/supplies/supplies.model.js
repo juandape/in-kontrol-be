@@ -28,7 +28,7 @@ const SuppliesSchema = new mongoose.Schema(
       required: true,
     },
     size: {
-      type: number,
+      type: Number,
       required: true,
     },
     quantity: {
