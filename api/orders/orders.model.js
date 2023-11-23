@@ -13,11 +13,6 @@ const OrdersSchema = new mongoose.Schema({
       required: true,
     },
   ],
-  orderNumber: {
-    type: String,
-    required: false,
-    unique: true,
-  },
   orderDate: {
     type: Date,
     required: true,
